@@ -1,9 +1,10 @@
 import React, { useState } from 'react';
 import { MapPin, Phone, MessageCircle, Clock, Copy, Check, Send } from 'lucide-react';
 import { RESTAURANT_INFO } from '../data/restaurantData';
+import { BookingServiceMode } from './InquiryModal';
 
 interface LocationContactProps {
-  onOpenInquiry: () => void;
+  onOpenInquiry: (mode?: BookingServiceMode) => void;
 }
 
 export const LocationContact: React.FC<LocationContactProps> = ({ onOpenInquiry }) => {
@@ -223,13 +224,21 @@ export const LocationContact: React.FC<LocationContactProps> = ({ onOpenInquiry 
 
             <div className="pt-6 mt-6 border-t border-stone-800 text-center">
               <span className="text-xs text-stone-400">
-                Prefer a detailed table reservation?{' '}
+                Prefer a dedicated booking form?{' '}
                 <button
                   type="button"
-                  onClick={onOpenInquiry}
+                  onClick={() => onOpenInquiry('table')}
                   className="text-amber-400 hover:text-amber-300 underline underline-offset-2 ml-1"
                 >
-                  Open Table Booker
+                  Book Table
+                </button>
+                <span className="mx-1.5 text-stone-600">·</span>
+                <button
+                  type="button"
+                  onClick={() => onOpenInquiry('pickup')}
+                  className="text-amber-400 hover:text-amber-300 underline underline-offset-2"
+                >
+                  Order Pickup
                 </button>
               </span>
             </div>

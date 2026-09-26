@@ -1,9 +1,10 @@
 import React from 'react';
-import { ArrowDown, MessageCircle, Phone, MapPin } from 'lucide-react';
+import { ArrowDown, MessageCircle, Phone, MapPin, UtensilsCrossed, ShoppingBag } from 'lucide-react';
 import { RESTAURANT_INFO, RESTAURANT_IMAGES } from '../data/restaurantData';
+import { BookingServiceMode } from './InquiryModal';
 
 interface HeroProps {
-  onOpenInquiry: () => void;
+  onOpenInquiry: (mode?: BookingServiceMode) => void;
 }
 
 export const Hero: React.FC<HeroProps> = ({ onOpenInquiry }) => {
@@ -66,24 +67,21 @@ export const Hero: React.FC<HeroProps> = ({ onOpenInquiry }) => {
             Explore Menu
           </button>
 
-          <a
-            href={RESTAURANT_INFO.whatsappUrl}
-            target="_blank"
-            rel="noopener noreferrer"
-            className="flex items-center justify-center gap-2 px-6 py-3.5 bg-emerald-600/90 hover:bg-emerald-600 text-white font-medium text-sm rounded transition-all duration-200 border border-emerald-500/30 active:scale-[0.98]"
+          <button
+            onClick={() => onOpenInquiry('table')}
+            className="flex items-center justify-center gap-2 px-6 py-3.5 bg-stone-900/90 hover:bg-stone-800 text-stone-100 font-semibold text-sm rounded transition-all duration-200 border border-stone-700/80 active:scale-[0.98]"
           >
-            <MessageCircle className="w-4 h-4" />
-            <span>WhatsApp Us</span>
-          </a>
+            <UtensilsCrossed className="w-4 h-4 text-amber-400" />
+            <span>Book Table</span>
+          </button>
 
-          <a
-            href={RESTAURANT_INFO.phoneTel}
-            className="flex items-center justify-center gap-2 px-5 py-3.5 bg-stone-900/80 hover:bg-stone-800 text-stone-200 font-medium text-sm rounded transition-all duration-200 border border-stone-700/80 active:scale-[0.98]"
+          <button
+            onClick={() => onOpenInquiry('pickup')}
+            className="flex items-center justify-center gap-2 px-6 py-3.5 bg-stone-900/90 hover:bg-stone-800 text-stone-100 font-semibold text-sm rounded transition-all duration-200 border border-stone-700/80 active:scale-[0.98]"
           >
-            <Phone className="w-4 h-4 text-amber-400" />
-            <span className="sm:hidden">Call {RESTAURANT_INFO.phoneDisplay}</span>
-            <span className="hidden sm:inline">Call Direct</span>
-          </a>
+            <ShoppingBag className="w-4 h-4 text-amber-400" />
+            <span>Order Pickup</span>
+          </button>
         </div>
 
         {/* Quick Highlights with zero pills */}

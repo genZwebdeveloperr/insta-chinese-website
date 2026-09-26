@@ -1,9 +1,10 @@
 import React from 'react';
-import { Phone, MessageCircle, ArrowRight } from 'lucide-react';
+import { Phone, MessageCircle, ArrowRight, UtensilsCrossed, ShoppingBag } from 'lucide-react';
 import { RESTAURANT_INFO, RESTAURANT_IMAGES } from '../data/restaurantData';
+import { BookingServiceMode } from './InquiryModal';
 
 interface FinalCtaProps {
-  onOpenInquiry: () => void;
+  onOpenInquiry: (mode?: BookingServiceMode) => void;
 }
 
 export const FinalCta: React.FC<FinalCtaProps> = ({ onOpenInquiry }) => {
@@ -39,30 +40,29 @@ export const FinalCta: React.FC<FinalCtaProps> = ({ onOpenInquiry }) => {
         </h2>
 
         <p className="text-stone-300 text-sm sm:text-base md:text-lg max-w-xl font-light leading-relaxed mb-10 text-balance">
-          Join us at {RESTAURANT_INFO.name} for an authentic Asian culinary experience in Dehradun. Reserve your table or place your takeaway order directly.
+          Join us at {RESTAURANT_INFO.name} for an authentic Asian culinary experience in Dehradun. Reserve your table or order fresh takeaway for pickup.
         </p>
 
         <div className="flex flex-col sm:flex-row items-stretch sm:items-center gap-3 sm:gap-4 w-full sm:w-auto">
           <button
-            onClick={onOpenInquiry}
-            className="px-8 py-3.5 bg-amber-500 hover:bg-amber-400 text-stone-950 font-semibold text-xs sm:text-sm tracking-wider uppercase rounded transition-all duration-200 shadow-xl shadow-amber-500/20 active:scale-[0.98]"
+            onClick={() => onOpenInquiry('table')}
+            className="flex items-center justify-center gap-2 px-7 py-3.5 bg-amber-500 hover:bg-amber-400 text-stone-950 font-bold text-xs sm:text-sm tracking-wider uppercase rounded transition-all duration-200 shadow-xl shadow-amber-500/20 active:scale-[0.98]"
           >
-            Inquire Table
+            <UtensilsCrossed className="w-4 h-4" />
+            <span>Book Table</span>
           </button>
 
-          <a
-            href={RESTAURANT_INFO.whatsappUrl}
-            target="_blank"
-            rel="noopener noreferrer"
-            className="flex items-center justify-center gap-2 px-6 py-3.5 bg-emerald-600 hover:bg-emerald-500 text-white font-medium text-xs sm:text-sm rounded transition-all duration-200 active:scale-[0.98]"
+          <button
+            onClick={() => onOpenInquiry('pickup')}
+            className="flex items-center justify-center gap-2 px-7 py-3.5 bg-stone-900/90 hover:bg-stone-800 text-stone-100 font-bold text-xs sm:text-sm tracking-wider uppercase rounded transition-all duration-200 border border-stone-700/80 active:scale-[0.98]"
           >
-            <MessageCircle className="w-4 h-4" />
-            <span>Chat on WhatsApp</span>
-          </a>
+            <ShoppingBag className="w-4 h-4 text-amber-400" />
+            <span>Order Pickup</span>
+          </button>
 
           <button
             onClick={scrollToMenu}
-            className="flex items-center justify-center gap-2 px-6 py-3.5 bg-stone-900/90 hover:bg-stone-800 text-stone-200 font-medium text-xs sm:text-sm rounded transition-all duration-200 border border-stone-700/80 active:scale-[0.98]"
+            className="flex items-center justify-center gap-2 px-6 py-3.5 bg-stone-900/90 hover:bg-stone-800 text-stone-300 hover:text-white font-medium text-xs sm:text-sm rounded transition-all duration-200 border border-stone-800 active:scale-[0.98]"
           >
             <span>View Menu</span>
             <ArrowRight className="w-4 h-4" />
@@ -83,3 +83,4 @@ export const FinalCta: React.FC<FinalCtaProps> = ({ onOpenInquiry }) => {
     </section>
   );
 };
+

@@ -1,9 +1,10 @@
 import React, { useState, useEffect } from 'react';
 import { Phone, MessageCircle, Menu, X } from 'lucide-react';
 import { RESTAURANT_INFO } from '../data/restaurantData';
+import { BookingServiceMode } from './InquiryModal';
 
 interface NavbarProps {
-  onOpenInquiry: () => void;
+  onOpenInquiry: (mode?: BookingServiceMode) => void;
 }
 
 export const Navbar: React.FC<NavbarProps> = ({ onOpenInquiry }) => {
@@ -71,21 +72,28 @@ export const Navbar: React.FC<NavbarProps> = ({ onOpenInquiry }) => {
             </nav>
 
             {/* Zone 3: 1-2 primary actions */}
-            <div className="hidden sm:flex items-center gap-3">
+            <div className="hidden sm:flex items-center gap-2.5">
               <a
                 href={RESTAURANT_INFO.phoneTel}
-                className="flex items-center gap-2 px-3.5 py-2 text-xs font-semibold tracking-wider uppercase text-stone-300 hover:text-white border border-stone-700 hover:border-stone-500 rounded transition-colors whitespace-nowrap"
+                className="flex items-center gap-1.5 px-3 py-2 text-xs font-semibold tracking-wider uppercase text-stone-300 hover:text-white border border-stone-700 hover:border-stone-500 rounded transition-colors whitespace-nowrap"
                 title={`Call ${RESTAURANT_INFO.phoneDisplay}`}
               >
                 <Phone className="w-3.5 h-3.5 text-amber-500" />
-                <span>Call Us</span>
+                <span>Call</span>
               </a>
 
               <button
-                onClick={onOpenInquiry}
+                onClick={() => onOpenInquiry('pickup')}
+                className="px-3 py-2 text-xs font-semibold tracking-wider uppercase text-stone-200 hover:text-white bg-stone-800/90 hover:bg-stone-700 border border-stone-700 rounded transition-colors whitespace-nowrap"
+              >
+                Order Pickup
+              </button>
+
+              <button
+                onClick={() => onOpenInquiry('table')}
                 className="px-4 py-2 text-xs font-semibold tracking-wider uppercase text-stone-950 bg-amber-500 hover:bg-amber-400 rounded transition-colors shadow-sm whitespace-nowrap"
               >
-                Table Inquiry
+                Book Table
               </button>
             </div>
 
@@ -162,7 +170,7 @@ export const Navbar: React.FC<NavbarProps> = ({ onOpenInquiry }) => {
             </div>
 
             {/* Bottom Actions in Drawer */}
-            <div className="pt-6 border-t border-stone-800 flex flex-col gap-3">
+            <div className="pt-6 border-t border-stone-800 flex flex-col gap-2.5">
               <a
                 href={RESTAURANT_INFO.whatsappUrl}
                 target="_blank"
@@ -175,21 +183,32 @@ export const Navbar: React.FC<NavbarProps> = ({ onOpenInquiry }) => {
 
               <a
                 href={RESTAURANT_INFO.phoneTel}
-                className="w-full flex items-center justify-center gap-2 py-3 px-4 bg-stone-800 hover:bg-stone-700 text-stone-200 rounded text-sm font-medium transition-colors"
+                className="w-full flex items-center justify-center gap-2 py-2.5 px-4 bg-stone-800 hover:bg-stone-700 text-stone-200 rounded text-sm font-medium transition-colors"
               >
                 <Phone className="w-4 h-4 text-amber-500" />
                 <span>{RESTAURANT_INFO.phoneDisplay}</span>
               </a>
 
-              <button
-                onClick={() => {
-                  setMobileMenuOpen(false);
-                  onOpenInquiry();
-                }}
-                className="w-full py-3 px-4 bg-amber-500 hover:bg-amber-400 text-stone-950 rounded text-sm font-semibold transition-colors mt-1"
-              >
-                Reserve / Inquire Table
-              </button>
+              <div className="grid grid-cols-2 gap-2 mt-1">
+                <button
+                  onClick={() => {
+                    setMobileMenuOpen(false);
+                    onOpenInquiry('table');
+                  }}
+                  className="py-3 px-2 bg-amber-500 hover:bg-amber-400 text-stone-950 rounded text-xs font-bold uppercase tracking-wider transition-colors text-center"
+                >
+                  Book Table
+                </button>
+                <button
+                  onClick={() => {
+                    setMobileMenuOpen(false);
+                    onOpenInquiry('pickup');
+                  }}
+                  className="py-3 px-2 bg-stone-800 hover:bg-stone-700 text-amber-400 border border-stone-700 rounded text-xs font-bold uppercase tracking-wider transition-colors text-center"
+                >
+                  Order Pickup
+                </button>
+              </div>
             </div>
           </div>
         </div>
@@ -197,3 +216,4 @@ export const Navbar: React.FC<NavbarProps> = ({ onOpenInquiry }) => {
     </>
   );
 };
+

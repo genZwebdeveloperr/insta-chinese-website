@@ -1,9 +1,10 @@
 import React from 'react';
 import { Phone, MessageCircle, MapPin } from 'lucide-react';
 import { RESTAURANT_INFO } from '../data/restaurantData';
+import { BookingServiceMode } from './InquiryModal';
 
 interface FooterProps {
-  onOpenInquiry: () => void;
+  onOpenInquiry: (mode?: BookingServiceMode) => void;
 }
 
 export const Footer: React.FC<FooterProps> = ({ onOpenInquiry }) => {
@@ -110,12 +111,18 @@ export const Footer: React.FC<FooterProps> = ({ onOpenInquiry }) => {
                 <span className="text-sm">Message on WhatsApp</span>
               </a>
 
-              <div className="pt-2">
+              <div className="pt-2 flex flex-wrap gap-2">
                 <button
-                  onClick={onOpenInquiry}
-                  className="px-4 py-2 bg-stone-900 hover:bg-stone-800 text-stone-200 border border-stone-700 rounded text-xs font-medium transition-colors"
+                  onClick={() => onOpenInquiry('table')}
+                  className="px-3.5 py-2 bg-stone-900 hover:bg-stone-800 text-stone-200 border border-stone-700 hover:border-stone-500 rounded text-xs font-medium transition-colors"
                 >
-                  Request Table Reservation
+                  Book Table
+                </button>
+                <button
+                  onClick={() => onOpenInquiry('pickup')}
+                  className="px-3.5 py-2 bg-stone-900 hover:bg-stone-800 text-amber-400 border border-stone-700 hover:border-amber-500/60 rounded text-xs font-medium transition-colors"
+                >
+                  Order Pickup
                 </button>
               </div>
             </div>
